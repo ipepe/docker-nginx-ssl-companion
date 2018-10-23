@@ -4,13 +4,15 @@ services:
     image: ipepe/kitten
   server:
     environment:
-      - PROXYPASS_HOST=kitten
+    - PROXYPASS_HOST=kitten
+    - LETSENCRYPT_EMAIL=letsencrypt@ipepe.pl
+    - VIRTUAL_HOSTS=kitten.ipepe.pl
     build: .
     ports:
-     - "8080:80"
-     - "8443:443"
+    - "80:80"
+    - "443:443"
     links:
-      - "kitten"
+    - "kitten"
 
 
 # docker-compose -f docker-compose.dev.yml up --build

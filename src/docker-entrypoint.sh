@@ -8,6 +8,6 @@ nginx -t
 service nginx start
 service cron start
 
-bash /root/run-certbot.sh
+./root/run-certbot.sh
 
 tail -f /var/log/nginx/access.log

@@ -13,7 +13,9 @@ RUN apt-get update && \
     -keyout /etc/nginx/certs/default.key \
     -out /etc/nginx/certs/default.crt \
     -days 2048 -subj '/CN=localhost' -nodes && \
-    chmod +x /root/docker-entrypoint.sh
+    chmod +x /root/docker-entrypoint.sh && \
+    chmod +x /root/run-certbot.sh && \
+    ln -s /root/run-certbot.sh /etc/cron.daily/run-certbot.sh
 
 ENV VIRTUAL_HOSTS=localhost PROXYPASS_HOST=localhost PROXYPASS_PROTOCOL=http LETSENCRYPT_EMAIL=example@example.org
 

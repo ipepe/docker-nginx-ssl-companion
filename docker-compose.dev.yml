@@ -1,0 +1,20 @@
+version: '2'
+services:
+  server:
+    environment:
+      - PROXYPASS_HOST=kitten
+    build: .
+    ports:
+     - "8080:80"
+     - "8443:443"
+    links:
+      - "kitten"
+  kitten:
+    image: ipepe/kitten
+    ports:
+      - "8081:80"
+    expose:
+      - "80"
+
+
+# docker-compose -f docker-compose.dev.yml up --build

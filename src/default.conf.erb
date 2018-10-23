@@ -1,0 +1,22 @@
+server {
+    listen 80 default_server;
+    server_name <%= ENV.fetch('VIRTUAL_HOSTS','localhost') %>;
+    client_max_body_size 0;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name <%= ENV.fetch('VIRTUAL_HOSTS','localhost') %>;
+
+    server_tokens off;
+
+    ssl_certificate /etc/nginx/certs/default.crt;
+    ssl_certificate_key /etc/nginx/certs/default.key;
+
+    client_max_body_size 0;
+
+    location / {
+      proxy_pass <%= ENV.fetch('PROXYPASS_PROTOCOL', 'http') %>://<%= ENV.fetch('PROXYPASS_HOST', 'localhost') %>;
+    }
+}
